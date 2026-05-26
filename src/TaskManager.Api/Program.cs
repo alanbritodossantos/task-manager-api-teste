@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
 using TaskManager.Api.Middlewares;
 using TaskManager.Api.Models;
 using TaskManager.Application.Services;
@@ -14,7 +15,15 @@ builder.Services.AddControllers()
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddInfrastructure();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Task Manager API",
+        Version = "v1",
+        Description = "API REST para gestão de tarefas usando .NET e EF Core InMemory."
+    });
+});
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.InvalidModelStateResponseFactory = _ =>
