@@ -4,6 +4,11 @@ namespace TaskManager.Domain.Entities;
 
 public class TaskItem
 {
+    private TaskItem()
+    {
+        Title = string.Empty;
+    }
+
     public TaskItem(string title, string? description, DateTime? dueDate, TaskItemStatus status)
     {
         Id = Guid.NewGuid();
